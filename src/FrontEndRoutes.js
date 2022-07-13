@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Home from "./Home";
-import SignUpSignIn from "./SignUpSignIn";
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
 import Profile from "./Profile";
 import CompanyList from "./CompanyList";
 import CompanyDetail from "./CompanyDetail";
 import JobList from "./JobList";
-import JobDetail from "./JobDetail"
-import SignOut from "./SignOut";
+import ProtectedRoute from "./ProtectedRoute";
 
 const FrontEndRoutes = () => {
   
@@ -17,30 +17,27 @@ const FrontEndRoutes = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/auth/token">
-          <SignUpSignIn />
+        <Route exact path="/login">
+          <LoginForm login={login} />
         </Route>
-        <Route exact path="/auth/register">
-          <SignUpSignIn />
+        <Route exact path="signup">
+          <SignupForm signup={signup} />
         </Route>
-        <Route exact path="/signout">
-          <SignOut />
-        </Route>
-        <Route exact path="/users/:username">
+
+        <ProtectedRoute exact path="profile">
           <Profile />
-        </Route>
-        <Route exact path="/jobs">
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/jobs">
           <JobList />
-        </Route>
-        <Route exact path="/companies">
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/companies">
           <CompanyList />
-        </Route>
-        <Route exact path="/jobs/:id">
-          <JobDetail />
-        </Route>
-        <Route exact path="/companies/:handle">
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/companies/:handle">
           <CompanyDetail />
-        </Route>
+        </ProtectedRoute>
+
+        <Redirect to="/" />
       </Switch>
     );
 }
