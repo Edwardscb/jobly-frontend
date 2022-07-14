@@ -23,11 +23,11 @@ const CompanyDetail = () => {
 
     if (details) {
     return (
-        <div style={{color: "black"}}>
+        <div className="col-md-8 offset-md-2" style={{color: "black"}}>
             <h1>Company Name: {details.name}</h1>
-            <p>Company Description: {details.description}</p>
+            <p><h3>Company Description: {details.description}</h3></p>
             <p>Company Size: {details.numEmployees} employees</p>
-            Current Job Openings:
+            <b>Current Job Openings:</b>
 
             {details.jobs.map(job => <JobCard key={job.id} id={job.id} title={job.title} salary={job.salary} equity={job.equity} />)}
     

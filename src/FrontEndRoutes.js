@@ -13,6 +13,7 @@ const FrontEndRoutes = ({ login, signup }) => {
   
 
     return (
+      <div className="pt-5">
       <Switch>
         <Route exact path="/">
           <Home />
@@ -39,6 +40,7 @@ const FrontEndRoutes = ({ login, signup }) => {
 
         <Redirect to="/" />
       </Switch>
+      </div>
     );
 }
 

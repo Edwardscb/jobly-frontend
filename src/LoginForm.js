@@ -16,6 +16,7 @@ function LoginForm({ login }) {
         if (result.success) {
             history.push("/companies");
         } else {
+            console.debug("form errors=", formErrors)
             setFormErrors(result.errors);
         }
     }
@@ -32,14 +33,14 @@ function LoginForm({ login }) {
 
                 <div className="card">
                     <div className="card-body">
-                        <form onSubmit={handleSubmit}>
+                        <form style={{color: "black"}} onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label>Username</label>
-                                <input name="username" id="username" value={formData.username} onChange={handleChange} required></input>
+                                <input className="form-control" name="username" id="username" value={formData.username} onChange={handleChange} autoComplete="username" required></input>
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
-                                <input name="password" id="password" value={formData.password} onChange={handleChange} required></input>
+                                <input type="password" className="form-control" name="password" id="password" value={formData.password} onChange={handleChange} autoComplete="current-password" required></input>
                             </div>
                             {formErrors.length ? <div>{formErrors}</div> : null}
                             <button className="btn btn-primary float-right" onSubmit={handleSubmit}>Submit</button>
@@ -48,20 +49,6 @@ function LoginForm({ login }) {
                 </div>
             </div>
         </div>
-        // <div>
-        //     <form onSubmit={handleSubmit} >
-        //         <div>
-        //         <label htmlFor="username">Username: </label>
-        //             <input name="username" id="username" value={formData.username} onChange={handleChange} required></input>
-        //         </div>
-        //         <div>
-        //             <label htmlFor="password">Password: </label>
-        //             <input name="password" id="password" value={formData.password} onChange={handleChange} required></input>
-        //         </div>
-        //         {formErrors.length ? <div>{formErrors}</div> : null}
-        //         <button onSubmit={handleSubmit}>Submit</button>
-        //     </form>
-        // </div>
     );
 }
 

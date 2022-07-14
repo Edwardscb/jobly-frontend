@@ -26,6 +26,7 @@ function App() {
       async function getCurrentUser() {
         if (token) {
         const decodedToken = jwt_decode(token);
+        console.log(decodedToken)
         try {
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getProfile(decodedToken.username);
@@ -64,7 +65,7 @@ async function signup(signupData) {
 
 async function login(loginData) {
   try {
-    let token = await JoblyApi.login(loginData);
+    let token = await JoblyApi.signIn(loginData);
     setToken(token);
     return { success: true };
   } catch (err) {

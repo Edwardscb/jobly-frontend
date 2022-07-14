@@ -48,15 +48,22 @@ const JobList = () => {
     if (!jobs) return (<div>Please wait...</div>);
 
         return (
-            <div className="jList" >
-                <div className="jSearch">
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="searchBar">Search: </label><br />
-                        <input type="text" id="searchBar" name="searchBar" onChange={handleChange} value={data} ></input>
-                        <button type="submit" onSubmit={handleSubmit}>Submit</button>
+            <div className="jList col-md-8 offset-md-2">
+                <div className="input-group">
+                <div className="jSearch form-outline offset-md-5">
+                    <form  className="form-group" onSubmit={handleSubmit}>
+                        <div>
+                        <label className="form-label" htmlFor="searchBar">Search: </label>
+                        <input className="form-control" type="text" id="searchBar" name="searchBar" onChange={handleChange} value={data} ></input>
+                        </div>
+                        <div className="pull-right">
+                        <span><button className="btn btn-secondary form-control" type="submit" onSubmit={handleSubmit}>Submit</button></span>
+                        </div>
                     </form>
                 </div>
+            </div><div className="offset-md-3">
                 {jobs.map(j => (<JobCard key={j.id} id={j.id} title={j.title} salary={j.salary} equity={j.equity} />))}
+                </div>
             </div>
         );
 }
