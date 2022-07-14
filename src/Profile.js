@@ -52,14 +52,14 @@ const Profile = () => {
     }
 
     return (
-        <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+        <div className="col-md-6 col-lg-4 offset-md-3 offset-lg-4" style={{height: "100vh"}}>
         <h3>Profile</h3>
         <div className="card" style={{color: "black"}}>
           <div className="card-body">
             <form>
               <div className="form-group">
                 <label>Username</label>
-                <p className="form-control-plaintext">{formData.username}</p>
+                <p style={{fontWeight: "bold", fontSize: 24}}className="form-control-plaintext">{formData.username}</p>
               </div>
               <div className="form-group">
                 <label>First Name</label>

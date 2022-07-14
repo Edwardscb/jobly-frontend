@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useHistory } from "react-router-dom";
 import './App.css';
 import useLocalStorage from "./hooks/useLocalStorage";
 import JoblyApi from "./api";
@@ -7,11 +7,13 @@ import JoblyNavbar from "./Navbar";
 import FrontEndRoutes from "./FrontEndRoutes";
 import UserContext from "./UserContext";
 import jwt_decode from "jwt-decode";
+import { createBrowserHistory } from 'history';
 
-const token_storage = "jobly-token";
+export const token_storage = "jobly-token";
 
 
 function App() {
+  const history = useHistory();
   const [infoLoaded, setInfoLoaded] = useState(false);
   const [applicationIds, setApplicationIds] = useState(new Set([]));
   const [currentUser, setCurrentUser] = useState(null);
@@ -26,7 +28,6 @@ function App() {
       async function getCurrentUser() {
         if (token) {
         const decodedToken = jwt_decode(token);
-        console.log(decodedToken)
         try {
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getProfile(decodedToken.username);
@@ -47,7 +48,6 @@ function App() {
 function logout() {
   setCurrentUser(null);
   setToken(null);
-  console.log("after clicking logout", token)
 }
 
 async function signup(signupData) {
@@ -56,6 +56,7 @@ async function signup(signupData) {
     let token = await JoblyApi.signUp(signupData);
     console.debug("App signup token=", token)
     setToken(token);
+    setCurrentUser(signupData.username);
     return { success: true };
   } catch (err) {
     console.error("signup failed", err)
@@ -67,6 +68,7 @@ async function login(loginData) {
   try {
     let token = await JoblyApi.signIn(loginData);
     setToken(token);
+    setCurrentUser(loginData.username);
     return { success: true };
   } catch (err) {
     console.error("login failed", err)
@@ -80,7 +82,6 @@ function hasAppliedToJob(id) {
 
 function applyToJob(id) {
   if (hasAppliedToJob(id)) return;
-  console.log("App applyToJob", "id=", id, "currentUser.username=", currentUser.username)
   JoblyApi.applyToJob(currentUser.username, id);
   setApplicationIds(new Set([ ...applicationIds, id]));
 }
@@ -88,17 +89,16 @@ function applyToJob(id) {
 if (!infoLoaded) return (<div>Please wait...</div>);
 
   return (
-    <div className="App">
-      <BrowserRouter>
+        <div className="App">
+    <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
         <JoblyNavbar logout={logout} />
-        <main>
+          <main>
           <FrontEndRoutes login={login} signup={signup} />
-        </main>
+          </main>
         </UserContext.Provider>
       </BrowserRouter>
-
-    </div>
+        </div>
   );
 }
 

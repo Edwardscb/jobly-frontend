@@ -41,14 +41,14 @@ const JobList = () => {
 
     // calls the backend and updates the list of companies to only the ones that matched the search terms
     async function getSpecificJob(searchTerm) {
-        let res = await JoblyApi.getJob(searchTerm);
+        let res = await JoblyApi.getJobs(searchTerm);
         setJobs(res);
     }
 
     if (!jobs) return (<div>Please wait...</div>);
 
         return (
-            <div className="jList col-md-8 offset-md-2">
+            <div className="jList col-md-8 offset-md-2" style={{height: "100%"}}>
                 <div className="input-group">
                 <div className="jSearch form-outline offset-md-5">
                     <form  className="form-group" onSubmit={handleSubmit}>
@@ -61,7 +61,8 @@ const JobList = () => {
                         </div>
                     </form>
                 </div>
-            </div><div className="offset-md-3">
+            </div>
+            <div className="offset-md-3" style={{height: "100vh"}}>
                 {jobs.map(j => (<JobCard key={j.id} id={j.id} title={j.title} salary={j.salary} equity={j.equity} />))}
                 </div>
             </div>

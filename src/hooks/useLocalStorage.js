@@ -6,7 +6,7 @@ const useLocalStorage = (key, val = null) => {
     const [item, setItem] = useState(initialVal);
     
     useEffect(function setKeyInLocalStorage() {
-        console.log("Hooks useLocalStorage item=", item)
+        console.debug("Hooks useLocalStorage item=", item)
 
         if (item === null) {
             localStorage.removeItem(key);

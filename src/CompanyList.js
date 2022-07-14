@@ -52,16 +52,22 @@ const CompanyList = () => {
     return (
         <div className="cList col-md-8 offset-md-2">
             <div className="input-group">
-            <div className="cSearch form-outline">
-                <form onSubmit={handleSubmit}>
+            <div className="cSearch form-outline offset-md-5">
+                <form className="form-group" onSubmit={handleSubmit}>
+                    <div>
                     <label htmlFor="searchBar">Search: </label><br />
                     <input type="text" className="form-control" id="searchBar" name="searchBar" onChange={handleChange} value={data} ></input>
-                    <button type="submit" className="btn btn-secondary" >Submit</button>
+                    </div>
+                    <div className="pull-right">
+                    <span><button type="submit" className="btn btn-secondary form-control" >Submit</button></span>
+                    </div>
                 </form>
             </div>
             </div>
+            <div className="offset-md-3">
             {companies.map(c => (<CompanyCard key={c.handle} handle={c.handle} 
             name={c.name} description={c.description} logoUrl={c.logoUrl} />))}
+        </div>
         </div>
     );
     } else {

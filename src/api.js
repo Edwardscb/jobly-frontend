@@ -76,7 +76,6 @@ class JoblyApi {
 
   // returns user profile information
   static async getProfile(username) {
-    console.log("username=", username)
     let res = await this.request(`users/${username}`);
     return res.user
   }

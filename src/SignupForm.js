@@ -30,7 +30,7 @@ function SignupForm({ signup }) {
     }
 
     return (
-        <div className="SignupForm">
+        <div className="SignupForm" style={{height: "100vh"}}>
         <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
             <h2 className="mb-3">Sign up</h2>
             <div className="card">

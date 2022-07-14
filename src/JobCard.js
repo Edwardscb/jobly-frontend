@@ -13,7 +13,6 @@ const JobCard = ({ id, title, salary, equity }) => {
     
     async function handleApply() {
         if (hasAppliedToJob(id)) return;
-        console.log("applied id=", id)
         applyToJob(id);
         setApplied(true);
     }
