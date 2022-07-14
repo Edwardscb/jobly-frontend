@@ -14,6 +14,7 @@ const CompanyList = () => {
     // last time it didn't work for me and I can't remember what I did wrong... but now it is working and it makes a lot more 
     // sense as to why I can have multiple pieces of state in App().
     const [data, setData] = useState("");
+    console.debug("CompanyList", "companies=", companies, "data=", data);
 
 
    
@@ -21,7 +22,7 @@ const CompanyList = () => {
     useEffect(function getAll() {
         async function getAllCompanies() {
         let company = await JoblyApi.getCompanies();
-        console.log(company)
+        console.debug("CompanyList useEffect getAllCompanies", "company=", company)
         setCompanies(company);
     } getAllCompanies();
 }, [])

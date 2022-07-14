@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Navbar.css";
-import { NavLink } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link, NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
+import UserContext from "./UserContext";
 
-const JoblyNavbar = () => {
+const JoblyNavbar = ({ logout }) => {
+    const { currentUser } = useContext(UserContext);
 
+    function loggedInNav() {
     return (
         
             <Navbar expand="md">
@@ -21,22 +23,35 @@ const JoblyNavbar = () => {
                     <NavLink to="/companies">Companies</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/auth/register">Sign up</NavLink>
+                    <NavLink to="/profile">Profile</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink to="/auth/token">Sign in</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink to="/users/:username">Profile</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink to="/signout">Sign out</NavLink>
+                    <Link to="/" onClick={ logout }>Sign out</Link>
                 </NavItem>
             </Nav>
             </Navbar>
-        
-
     );
+}
+
+function loggedOutNav() {
+    return (
+        <ul className="ml-auto">
+            <li>
+                <NavLink to="/signup">Sign up</NavLink>
+            </li>
+            <li>      
+                <NavLink to="/login">Sign in</NavLink>
+            </li>
+        </ul>      
+    );
+}
+
+return (
+    <nav>
+        <Link to="/">Jobly</Link>
+        {currentUser ? loggedInNav() : loggedOutNav()}
+    </nav>
+);
 }
 
 export default JoblyNavbar;

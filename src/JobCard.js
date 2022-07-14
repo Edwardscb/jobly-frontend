@@ -5,13 +5,15 @@ import UserContext from "./UserContext";
 const JobCard = ({ id, title, salary, equity }) => {
     const { hasAppliedToJob, applyToJob } = useContext(UserContext);
     const [applied, setApplied] = useState();
+    console.debug("JobCard", "hasAppliedToJob=", hasAppliedToJob, "applied=", applied)
 
     useEffect(function updateAppliedStatus() {
         setApplied(hasAppliedToJob(id));
     }, [id, hasAppliedToJob]);
-
-    async function handleApply(evt) {
+    
+    async function handleApply() {
         if (hasAppliedToJob(id)) return;
+        console.log("applied id=", id)
         applyToJob(id);
         setApplied(true);
     }

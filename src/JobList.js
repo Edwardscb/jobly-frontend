@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import JoblyApi from "./api";
-import JobDetail from "./JobDetail";
+import JobCard from "./JobCard";
 
 
 
 const JobList = () => {
-
     const [jobs, setJobs] = useState(null);
     // const [mem, addToMem] = useMem();
-
+    
     // added [data, setData] to try again with using multiple pieces of state in a single component and this time it is working
     // last time it didn't work for me and I can't remember what I did wrong... but now it is working and it makes a lot more 
     // sense as to why I can have multiple pieces of state in App().
     const [data, setData] = useState("");
-
-
-   
+    console.debug("JobList", "jobs=", jobs, "data=", data);
+    
+    
+    
     // gets all companies upon initial render.
     useEffect(function getAll() {
         async function getAllJobs() {
         let job = await JoblyApi.getJobs();
+        console.debug("JobList useEffect getAllJobs", "job=", job)
         setJobs(job);
     } getAllJobs();
+    console.debug("JobList useEffect getAllJobs, execute getAllJobs")
 }, [])
     
     // updates 'mem' when input occurs in the search field.  I changed this to setData and it works this time.
@@ -43,27 +45,20 @@ const JobList = () => {
         setJobs(res);
     }
 
-    if (jobs) {
+    if (!jobs) return (<div>Please wait...</div>);
+
         return (
-            <div className="jList">
+            <div className="jList" >
                 <div className="jSearch">
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="searchBar">Search: </label><br />
                         <input type="text" id="searchBar" name="searchBar" onChange={handleChange} value={data} ></input>
-                        <button type="submit">Submit</button>
+                        <button type="submit" onSubmit={handleSubmit}>Submit</button>
                     </form>
                 </div>
                 {jobs.map(j => (<JobCard key={j.id} id={j.id} title={j.title} salary={j.salary} equity={j.equity} />))}
             </div>
         );
-    } else {
-        return (
-            <div className="jList">
-                <p className="NotFound">Sorry, not found!</p>
-            </div>
-        )
-    }
-
 }
 
 export default JobList;

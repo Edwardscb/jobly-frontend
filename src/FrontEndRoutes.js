@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Home from "./Home";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
@@ -9,7 +9,7 @@ import CompanyDetail from "./CompanyDetail";
 import JobList from "./JobList";
 import ProtectedRoute from "./ProtectedRoute";
 
-const FrontEndRoutes = () => {
+const FrontEndRoutes = ({ login, signup }) => {
   
 
     return (
@@ -20,11 +20,11 @@ const FrontEndRoutes = () => {
         <Route exact path="/login">
           <LoginForm login={login} />
         </Route>
-        <Route exact path="signup">
+        <Route exact path="/signup">
           <SignupForm signup={signup} />
         </Route>
 
-        <ProtectedRoute exact path="profile">
+        <ProtectedRoute exact path="/profile">
           <Profile />
         </ProtectedRoute>
         <ProtectedRoute exact path="/jobs">

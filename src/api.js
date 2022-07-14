@@ -49,8 +49,9 @@ class JoblyApi {
   }
 
   // gets a list of all jobs
-  static async getJobs() {
-    let res = await this.request(`jobs/`);
+  static async getJobs(title) {
+    console.debug("JoblyApi getJobs title=", title)
+    let res = await this.request(`jobs`, { title });
     return res.jobs
   }
 
@@ -62,6 +63,7 @@ class JoblyApi {
 
   // register a new user and return a token
   static async signUp(signUpInfo) {
+    console.debug("api signUp", signUpInfo)
     let res = await this.request(`auth/register`, signUpInfo, "post");
     return res.token
   }
@@ -74,6 +76,7 @@ class JoblyApi {
 
   // returns user profile information
   static async getProfile(username) {
+    console.log("username=", username)
     let res = await this.request(`users/${username}`);
     return res.user
   }
@@ -91,7 +94,7 @@ class JoblyApi {
   }
 
   // returns jobs that user has applied to
-  static async applyForJob(username, id) {
+  static async applyToJob(username, id) {
     let res = await this.request(`users/${username}/jobs/${id}`, {}, "post");
     return res.data
   }

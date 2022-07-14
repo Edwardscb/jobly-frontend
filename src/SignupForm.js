@@ -13,11 +13,13 @@ function SignupForm({ signup }) {
     const [formErrors, setFormErrors] = useState([]);
 
     async function handleSubmit(evt) {
+        console.debug("SignupForm handleSubmit evt=", evt, "formData=", formData);
         evt.preventDefault();
         let result = await signup(formData);
         if (result.success) {
             history.push("/companies");
         } else {
+            console.debug("SignupForm handleSubmit error", result)
             setFormErrors(result.errors);
         }
     }
