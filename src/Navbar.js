@@ -35,20 +35,24 @@ const JoblyNavbar = ({ logout }) => {
 
 function loggedOutNav() {
     return (
-        <ul className="ml-auto">
-            <li>
+        <Navbar expand="md">
+                <NavLink exact to="/" className="navbar-brand">
+                    React Jobly
+                </NavLink>
+        <ul className="ml-auto navbar-nav">
+            <li className="nav-item mr-4">
                 <NavLink to="/signup">Sign up</NavLink>
             </li>
-            <li>      
+            <li className="nav-item mr-4">      
                 <NavLink to="/login">Sign in</NavLink>
             </li>
-        </ul>      
+        </ul>
+        </Navbar>    
     );
 }
 
 return (
     <nav>
-        <Link to="/">Jobly</Link>
         {currentUser ? loggedInNav() : loggedOutNav()}
     </nav>
 );
