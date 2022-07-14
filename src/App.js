@@ -89,11 +89,11 @@ function applyToJob(id) {
 if (!infoLoaded) return (<div>Please wait...</div>);
 
   return (
-        <div className="App">
+        <div className="App" style={{overflow: "hidden"}}>
     <BrowserRouter>
       <UserContext.Provider value={{ currentUser, setCurrentUser, hasAppliedToJob, applyToJob }}>
         <JoblyNavbar logout={logout} />
-          <main>
+          <main style={{height: "100vh", overflowY: "scroll", backgroundColor: "rgb(122, 159, 196)"}}>
           <FrontEndRoutes login={login} signup={signup} />
           </main>
         </UserContext.Provider>

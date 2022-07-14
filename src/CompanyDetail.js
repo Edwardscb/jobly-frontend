@@ -22,7 +22,7 @@ const CompanyDetail = () => {
 
     if (details) {
     return (
-        <div className="col-md-8 offset-md-2" style={{color: "black"}}>
+        <div className="col-md-8 offset-md-2" style={{color: "black", height: "100%"}}>
             <h1>Company Name: {details.name}</h1>
             <p><h3>Company Description: {details.description}</h3></p>
             <p>Company Size: {details.numEmployees} employees</p>

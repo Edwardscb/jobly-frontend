@@ -13,7 +13,7 @@ const FrontEndRoutes = ({ login, signup }) => {
   
 
     return (
-      <div className="pt-5">
+      <div className="pt-5" style={{height: "100vh"}}>
       <Switch>
         <Route exact path="/">
           <Home />

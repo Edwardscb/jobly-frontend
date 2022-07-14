@@ -6,8 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding: 0;
-  height: 100%;
-  overflow: scroll;
+  /* height: 99%; */
+  /* overflow: scroll; */
   background-color: rgb(122, 159, 196);
   background-size: cover;
 }

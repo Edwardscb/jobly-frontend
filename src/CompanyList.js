@@ -50,7 +50,7 @@ const CompanyList = () => {
 
     if (companies) {
     return (
-        <div className="cList col-md-8 offset-md-2">
+        <div className="cList col-md-8 offset-md-2" style={{height: "100vh"}}>
             <div className="input-group">
             <div className="cSearch form-outline offset-md-5">
                 <form className="form-group" onSubmit={handleSubmit}>
