@@ -58,9 +58,9 @@ async function signup(signupData) {
     setToken(token);
     setCurrentUser(signupData.username);
     return { success: true };
-  } catch (err) {
-    console.error("signup failed", err)
-    return { success: false, err}
+  } catch (errors) {
+    console.error("signup failed", errors)
+    return { success: false, errors}
   }
 }
 
@@ -70,9 +70,9 @@ async function login(loginData) {
     setToken(token);
     setCurrentUser(loginData.username);
     return { success: true };
-  } catch (err) {
-    console.error("login failed", err)
-    return { success: false, err}
+  } catch (errors) {
+    console.error("login failed", errors)
+    return { success: false, errors}
   }
 }
 

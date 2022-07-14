@@ -16,7 +16,6 @@ function LoginForm({ login }) {
         if (result.success) {
             history.push("/companies");
         } else {
-            console.debug("form errors=", formErrors)
             setFormErrors(result.errors);
         }
     }
@@ -41,8 +40,8 @@ function LoginForm({ login }) {
                             <div className="form-group">
                                 <label>Password</label>
                                 <input type="password" className="form-control" name="password" id="password" value={formData.password} onChange={handleChange} autoComplete="current-password" required></input>
+                            {formErrors.length ? <div style={{color: "red"}}> Error: {formErrors}</div> : null}
                             </div>
-                            {formErrors.length ? <div>{formErrors}</div> : null}
                             <button className="btn btn-primary float-right" onSubmit={handleSubmit}>Submit</button>
                         </form>
                     </div>

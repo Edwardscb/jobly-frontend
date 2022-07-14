@@ -18,7 +18,6 @@ const CompanyDetail = () => {
         } getDetails(); 
     }, [handle])
     
-    console.log(details.jobs)
 
 
     if (details) {
